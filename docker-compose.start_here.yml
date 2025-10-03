@@ -1,0 +1,32 @@
+services:
+  podblog:
+    image: golang:latest
+    container_name: golang-podblog
+    working_dir: /app
+    volumes:
+      - /podblog:/app # this is your website directory and should house this github repository
+      - /golang/bin:/go/bin # Linking the system's go/bin and go/pkg to the server's allows for debugging outside the container but introduces security concerns
+      - /golang/pkg:/go/pkg
+    environment:
+      - GO111MODULE=on
+      - CGO_ENABLED=0
+      - GOOS=linux
+      - GOARCH=amd64
+    ports:
+      - "32001:8080"
+    command: >
+      bash -c "
+      if ! command -v pandoc >/dev/null || ! command -v curl >/dev/null; then
+        apt-get update && apt-get install -y pandoc curl;
+      fi &&
+      mkdir -p static/js &&
+      if [ ! -f static/js/htmx.min.js ]; then
+        curl -L -o static/js/htmx.min.js https://unpkg.com/htmx.org@1.11.0/dist/htmx.min.js
+      fi &&
+      if [ ! -f go.mod ]; then
+        go mod init podblog;
+      fi &&
+      go mod tidy &&
+      go run cmd/server/main.go
+      "
+    restart: unless-stopped

@@ -1,0 +1,27 @@
+# Go compiled files
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+
+.DS_STORE
+Thumbs.db
+/bin
+/pkg
+
+.env
+*.log
+
+web/content/*
+web/content/*/media/*
+
+docs/*
+docs/**/
+
+docker-compose.override.yml
+docker-compose.yml
+Dockerfile
+
+.git/

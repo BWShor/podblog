@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Moose Talks Shop</title>
+  <!-- Your site stylesheet -->
+  <link rel="stylesheet" href="/static/styles/style.css" />
+  <!-- Prism dark theme (served locally) -->
+  <link rel="stylesheet" href="/static/styles/prism-tomorrow.css" />
+  <!-- htmx – we already have this locally -->
+  <script nonce="{{.Nonce}}">
+  window.htmxConfig = {
+    inlineStyleNonce: "{{.Nonce}}",
+    inlineScriptNonce: "{{.Nonce}}",
+    allowEval: false,            // safer, avoids eval() where possible
+    includeIndicatorStyles: false // avoid inline style injection
+	  };
+  </script>
+  <script nonce="{{.Nonce}}" src="/static/js/htmx.min.js"></script>
+
+  <script nonce="{{.Nonce}}" src="/static/js/prism.min.js"></script>
+  <script nonce="{{.Nonce}}" src="/static/js/prism-components/prism-go.min.js"></script>
+  <script nonce="{{.Nonce}}" src="/static/js/prism-components/prism-python.min.js"></script>
+  <script nonce="{{.Nonce}}" src="/static/js/prism-components/prism-sql.min.js"></script>
+  <script nonce="{{.Nonce}}" src="/static/js/prism-components/prism-java.min.js"></script>
+  <script nonce="{{.Nonce}}" src="/static/js/prism-components/prism-bash.min.js"></script>
+</head>
+<body>
+  <header>
+    <!-- Hamburger menu -->
+    <button id="menu-btn" hx-get="/menu" hx-target="#menu" hx-trigger="click" hx-swap="innerHTML:swap">☰</button>
+    <h1>Moose Talks Shop</h1>
+  </header>
+
+  <!-- Menu drawer -->
+  <aside id="menu" class="menu"></aside>
+  <main id="content"
+	  hx-get="/page/{{.ID}}/content"
+	  hx-trigger="load"
+	  hx-swap="innerHTML"
+	  hx-push-url="/page/{{.ID}}">
+    {{.Content}}
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Moosewerk. All rights reserved.</p>
+  </footer>
+
+  <script nonce="{{.Nonce}}">
+    const menuBtn = document.getElementById("menu-btn");
+    const menu = document.getElementById("menu");
+
+    // Toggle menu visibility on click
+    menuBtn.addEventListener("click", (e) => {
+      // Only toggle if content is already loaded
+      if (menu.innerHTML.trim() !== "") {
+        menu.style.display = menu.style.display === "block" ? "none" : "block";
+      }
+    });
+
+    // Listen for HTMX swap to show menu automatically
+    document.body.addEventListener('htmx:afterSwap', (e) => {
+      if (e.target.id === 'menu') {
+        menu.style.display = 'block';
+      }
+    });
+
+    // Click outside closes menu
+    document.addEventListener("click", (e) => {
+      if (!menu.contains(e.target) && e.target !== menuBtn) {
+        menu.style.display = "none";
+      }
+    });
+
+    // Escape closes menu
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        menu.style.display = "none";
+      }
+    });
+
+    /*
+    // Optional: Re-highlight Prism.js after dynamic HTMX content swaps
+    // Uncomment if you plan to insert code blocks dynamically via HTMX
+    document.body.addEventListener('htmx:afterSwap', (e) => {
+      if (e.target.id === 'content') {
+        Prism.highlightAll();
+      }
+    });
+    */
+  </script>
+</body>
+</html>

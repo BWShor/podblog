@@ -1,0 +1,297 @@
+@font-face {
+    font-family: "AlteredQuest";
+    src: url("/static/fonts/Altered-Quest.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "PFTempestaFive";
+    src: url("/static/fonts/PF-Tempesta-Five.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Athens-Classic";
+    src: url("/static/fonts/Athens-Classic.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Base styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: "Athens-Classic";
+    background-color: #121212;
+    color: #e0e0e0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Header */
+header {
+    background: linear-gradient(90deg, #1a1a1a, #222);
+    padding: 1em 2em;
+    width: 100%;
+    display: flex;
+	gap: 1em;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 2px solid #0ff; /* neon accent */
+    box-sizing: border-box;
+}
+
+header h1 {
+    font-family: "AlteredQuest", sans-serif;
+    font-size: 2.5em;
+    color: #0ff;
+    text-shadow: 1px 1px 3px #000;
+    margin: 0;
+}
+
+button#menu-btn {
+    padding: 0.5em 1em;
+    font-family: "PFTempestaFive", sans-serif;
+    background: #111;
+    color: #0ff;
+    border: 2px solid #0ff;
+    cursor: pointer;
+    text-transform: uppercase;
+}
+
+button#menu-btn:hover {
+    background: #0ff;
+    color: #111;
+}
+
+/* Main content wrapper */
+.main-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 90%;
+    max-width: 1000px;
+    margin: 2em 0;
+    background: #181818;
+    padding: 2em;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 150, 150, 0.7);
+    box-sizing: border-box;
+}
+
+aside.menu {
+    display: none;            /* hidden by default */
+    position: absolute;       /* overlay below header */
+    top: 0px;                /* adjust to header height */
+    left: 0em;                /* small left margin */
+    width: 220px;             /* fixed width */
+    max-height: 300px;        /* allows scrolling after ~10 items */
+    overflow-y: auto;         /* scroll if too tall */
+    background: #1b1b1b;
+	white-space: nowrap;
+    padding: 0em;           /* reduced padding */
+    border: 2px solid #0ff;   /* neon border */
+    box-shadow: 0 4px 15px rgba(0, 150, 150, 0.7); /* subtle glow */
+    border-radius: 6px;       /* slightly rounded corners */
+    font-family: "PFTempestaFive", sans-serif;
+    font-size: 1.1em;         /* adjust if needed */
+    z-index: 1000;
+}
+
+aside.menu a {
+    display: block;
+    padding: 0.1em 0.1em;     /* tighter spacing */
+    color: #e0e0e0;
+    text-decoration: none;
+    cursor: pointer;          /* finger pointer on links */
+}
+
+aside.menu a:hover {
+    color: #0ff;
+    text-shadow: 0 0 5px #0ff;
+}
+
+/* Main content */
+main {
+    width: 100%;
+    font-family: "Athens-Classic", monospace;
+    line-height: 1.5em;
+}
+
+/* Headers inside content */
+main h2, main h3 {
+    font-family: "PFTempestaFive", sans-serif;
+    color: #0ff;
+    text-shadow: 1px 1px 2px #000;
+}
+
+/* Audio player styling */
+audio {
+    width: 100%;
+    margin-top: 1em;
+}
+
+/* Text styling */
+main p, main li {
+    text-shadow: 0 0 1px #000;
+    color: #ccc;
+}
+
+/* Content page styling */
+#content {
+    width: 90%;
+    max-width: 1000px;
+    margin: 2em auto; /* top/bottom 2em, centered horizontally */
+    padding: 2em;
+    background-color: #181818; /* match main wrapper */
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 150, 150, 0.5); /* darker version of your neon shadow */
+    box-sizing: border-box;
+}
+
+/* ======================
+   Code Blocks + Syntax Highlighting
+   ====================== */
+
+/* General pre/code styling */
+pre, code {
+    font-family: "PFTempestaFive", monospace;
+    background: #111;       /* dark neon background */
+    color: #0ff;            /* base neon text */
+    text-shadow: 0 0 2px #000;
+}
+
+/* Block code (multi-line) */
+pre {
+    padding: 1em;
+    border-radius: 8px;
+    overflow-x: auto;       /* horizontal scroll if code too wide */
+    box-shadow: 0 0 12px rgba(0, 255, 255, 0.5);
+    margin: 1.5em 0;
+}
+
+/* Inline code inside paragraphs or list items */
+p code, li code {
+    background: #181818;
+    color: #0ff;
+    box-shadow: 0 0 5px rgba(0, 255, 255, 0.4);
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+}
+
+/* ======================
+   Prism.js Token Colors
+   ====================== */
+
+/* Comments, prolog, doctype, cdata */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+    color: #888;
+    font-style: italic;
+}
+
+/* Punctuation */
+.token.punctuation {
+    color: #0ff;
+}
+
+/* Property, tag, boolean, number, constant, symbol */
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol {
+    color: #f0f;
+}
+
+/* Selector, attr-name, string, char, builtin, inserted */
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+    color: #ff0;
+}
+
+/* Operator, entity, url */
+.token.operator,
+.token.entity,
+.token.url {
+    color: #0ff;
+}
+
+/* Atrule, attr-value, keyword */
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+    color: #f80;
+}
+
+/* Function, class-name */
+.token.function,
+.token.class-name {
+    color: #0f0;
+}
+
+/* Regex, important, variable */
+.token.regex,
+.token.important,
+.token.variable {
+    color: #f55;
+}
+
+/* ======================
+   Tooltip Styles
+   ====================== */
+
+.tooltip-wrapper {
+  position: relative !important;
+  display: inline-block !important;
+  cursor: pointer !important;
+}
+
+.tooltip-wrapper .tooltip {
+  position: absolute !important;
+  display: block !important;
+  bottom: 125% !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  background-color: #0ff !important;
+  color: #121212 !important;
+  text-align: center !important;
+  padding: 6px 10px !important;
+  border-radius: 4px !important;
+  font-size: 0.85rem !important;
+  line-height: 1.2 !important;
+  white-space: nowrap !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  transition: opacity 0.2s ease-in-out !important;
+  z-index: 20 !important;
+  box-shadow: 0 0 10px #0ff !important;
+}
+
+.tooltip-wrapper .tooltip::after {
+  content: "" !important;
+  position: absolute !important;
+  top: 100% !important;
+  left: 50% !important;
+  margin-left: -5px !important;
+  border-width: 5px !important;
+  border-style: solid !important;
+  border-color: #0ff transparent transparent transparent !important;
+}
+
+.tooltip-wrapper:hover .tooltip {
+  opacity: 1 !important;
+  visibility: visible !important;
+}
+
