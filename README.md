@@ -38,6 +38,7 @@ It is built around a few core libraries:
 
 ## 📁 Project layout
 
+```
 podblog/
 ├─ cmd/
 │ ├─ server/ # Echo server + middleware
@@ -53,7 +54,7 @@ podblog/
 ├─ menuindex.yml # Optional ordering file
 ├─ docker-compose.yml
 └─ go.mod
-
+```
 
 ---
 
