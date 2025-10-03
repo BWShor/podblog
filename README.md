@@ -20,7 +20,7 @@ A minimal, Go‑based static podcast/blog site that uses **Echo**, **HTMX**, **P
 
 ```bash  
 # Clone  
-git clone https://github.com/You/podblog.git  
+git clone https://github.com/BWShor/podblog.git  
 cd podblog  
 
 # Run locally  
